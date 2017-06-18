@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Tarık Demirci</title>
+  <subtitle>Tarık Demirci&#39;s Personal Page</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://tarik.io/"/>
+  <updated>2017-06-18T11:33:30.000Z</updated>
+  <id>https://tarik.io/</id>
+  
+  <author>
+    <name>Tarık Demirci</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Install Tomcat on Mac OS</title>
+    <link href="https://tarik.io/en/tools/tomcat/2017/06/18/install-tomcat-on-mac-os/"/>
+    <id>https://tarik.io/en/tools/tomcat/2017/06/18/install-tomcat-on-mac-os/</id>
+    <published>2017-06-18T11:18:32.000Z</published>
+    <updated>2017-06-18T11:33:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Recently, embedded Tomcat in spring-boot caused problems with a dependency. Migrating to standalone Tomcat solved it luckily.</p>
+<p>Installing Tomcat on Mac OS is very simple if you have <code>brew</code> installed:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tomcat</div></pre></td></tr></table></figure></p>
+<p>You can run Tomcat with following command after the installation (you may need to replace directory <em>8.5.15</em> with your own installed version):<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/Cellar/tomcat/8.5.15/bin/catalina run</div></pre></td></tr></table></figure></p>
+<p>You should be able to see default tomcat page now:</p>
+<ul>
+<li><a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></li>
+</ul>
+<p>Deploying your application is also very simple. Copying the <em>.war</em> file to <em>webapps</em> folder will trigger the deployment.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp app.war /usr/<span class="built_in">local</span>/Cellar/tomcat/8.5.15/libexec/webapps/</div></pre></td></tr></table></figure></p>
+<p>References:</p>
+<ul>
+<li><a href="https://maltronic.io/2016/01/14/easily-install-apache-tomcat-on-mac-os-x-10-11-el-capitan-with-homebrew/" target="_blank" rel="external">https://maltronic.io/2016/01/14/easily-install-apache-tomcat-on-mac-os-x-10-11-el-capitan-with-homebrew/</a></li>
+<li><a href="http://www.baeldung.com/tomcat-deploy-war#Copying" target="_blank" rel="external">http://www.baeldung.com/tomcat-deploy-war#Copying</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Recently, embedded Tomcat in spring-boot caused problems with a dependency. Migrating to standalone Tomcat solved it luckily.&lt;/p&gt;
+&lt;p&gt;Inst
+    
+    </summary>
+    
+      <category term="Tools" scheme="https://tarik.io/categories/tools/"/>
+    
+      <category term="Tomcat" scheme="https://tarik.io/categories/tools/tomcat/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>PHP Debugging: Show all levels in vardump</title>
+    <link href="https://tarik.io/en/languages/php/2017/06/18/php-debugging-show-all-levels-in-vardump/"/>
+    <id>https://tarik.io/en/languages/php/2017/06/18/php-debugging-show-all-levels-in-vardump/</id>
+    <published>2017-06-18T10:47:25.000Z</published>
+    <updated>2017-06-18T11:36:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>During PHP debugging, using <code>var_dump()</code> is a very common practice. <em>var_dump</em> limits its output if the object has many levels of children. You need to change some default values of xdebug to show full data.</p>
+<p>You can change them on your <code>php.ini</code> file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xdebug.var_display_max_depth = 15</div><div class="line">xdebug.var_display_max_children = 1024</div><div class="line">xdebug.var_display_max_data = 8192</div></pre></td></tr></table></figure></p>
+<p>You can also set them on run-time, if you prefer avoiding a webserver restart. Put the code below before your <em>var_dump</em> call:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ini_set(<span class="string">'xdebug.var_display_max_depth'</span>, <span class="number">15</span>);</div><div class="line">ini_set(<span class="string">'xdebug.var_display_max_children'</span>, <span class="number">1024</span>);</div><div class="line">ini_set(<span class="string">'xdebug.var_display_max_data'</span>, <span class="number">8192</span>);</div></pre></td></tr></table></figure></p>
+<p>Reference:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/9998490/how-to-get-xdebug-var-dump-to-show-full-object-array" target="_blank" rel="external">https://stackoverflow.com/questions/9998490/how-to-get-xdebug-var-dump-to-show-full-object-array</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;During PHP debugging, using &lt;code&gt;var_dump()&lt;/code&gt; is a very common practice. &lt;em&gt;var_dump&lt;/em&gt; limits its output if the object has many
+    
+    </summary>
+    
+      <category term="Languages" scheme="https://tarik.io/categories/languages/"/>
+    
+      <category term="PHP" scheme="https://tarik.io/categories/languages/php/"/>
+    
+    
+  </entry>
+  
+</feed>
