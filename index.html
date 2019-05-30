@@ -1,21 +1,27 @@
-<!DOCTYPE html><html lang="tr,en,default"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>Tarık Demirci</title><meta name="description" content="Tarık Demirci's Personal Page"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/gandalfr.css"><link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/solarized-light.css"><link rel="search" type="application/opensearchdescription+xml" href="https://tarik.io/atom.xml" title="Tarık Demirci"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars3.githubusercontent.com/u/2494262?v=3&amp;s=460" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link active">HOME</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="/contact/" target="_self" class="nav-list-link">CONTACT</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/en/tools/tomcat/2017/06/18/install-tomcat-on-mac-os/" class="post-title-link">Install Tomcat on Mac OS</a></h2><div class="categories"><a href="/categories/tools/" style="color: #999;" class="post-list__item__meta__link">Tools</a><span style="margin: 0 0.5rem; color: #999;" class="post-list__item__meta__label">></span><a href="/categories/tools/tomcat/" style="color: #999;" class="post-list__item__meta__link">Tomcat</a></div><div class="tags"></div><div class="post-info">Jun 18, 2017</div><div class="post-content"><p>Recently, embedded Tomcat in spring-boot caused problems with a dependency. Migrating to standalone Tomcat solved it luckily.</p>
-<p>Installing Tomcat on Mac OS is very simple if you have <code>brew</code> installed:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tomcat</div></pre></td></tr></table></figure></p>
-<p>You can run Tomcat with following command after the installation (you may need to replace directory <em>8.5.15</em> with your own installed version):<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/Cellar/tomcat/8.5.15/bin/catalina run</div></pre></td></tr></table></figure></p>
-<p>You should be able to see default tomcat page now:</p>
-<ul>
-<li><a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></li>
-</ul>
-<p>Deploying your application is also very simple. Copying the <em>.war</em> file to <em>webapps</em> folder will trigger the deployment.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp app.war /usr/<span class="built_in">local</span>/Cellar/tomcat/8.5.15/libexec/webapps/</div></pre></td></tr></table></figure></p>
-<p>References:</p>
-<ul>
-<li><a href="https://maltronic.io/2016/01/14/easily-install-apache-tomcat-on-mac-os-x-10-11-el-capitan-with-homebrew/" target="_blank" rel="external">https://maltronic.io/2016/01/14/easily-install-apache-tomcat-on-mac-os-x-10-11-el-capitan-with-homebrew/</a></li>
-<li><a href="http://www.baeldung.com/tomcat-deploy-war#Copying" target="_blank" rel="external">http://www.baeldung.com/tomcat-deploy-war#Copying</a></li>
-</ul>
-</div></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/en/languages/php/2017/06/18/php-debugging-show-all-levels-in-vardump/" class="post-title-link">PHP Debugging: Show all levels in vardump</a></h2><div class="categories"><a href="/categories/languages/" style="color: #999;" class="post-list__item__meta__link">Languages</a><span style="margin: 0 0.5rem; color: #999;" class="post-list__item__meta__label">></span><a href="/categories/languages/php/" style="color: #999;" class="post-list__item__meta__link">PHP</a></div><div class="tags"></div><div class="post-info">Jun 18, 2017</div><div class="post-content"><p>During PHP debugging, using <code>var_dump()</code> is a very common practice. <em>var_dump</em> limits its output if the object has many levels of children. You need to change some default values of xdebug to show full data.</p>
-<p>You can change them on your <code>php.ini</code> file:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xdebug.var_display_max_depth = 15</div><div class="line">xdebug.var_display_max_children = 1024</div><div class="line">xdebug.var_display_max_data = 8192</div></pre></td></tr></table></figure></p>
-<p>You can also set them on run-time, if you prefer avoiding a webserver restart. Put the code below before your <em>var_dump</em> call:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ini_set(<span class="string">'xdebug.var_display_max_depth'</span>, <span class="number">15</span>);</div><div class="line">ini_set(<span class="string">'xdebug.var_display_max_children'</span>, <span class="number">1024</span>);</div><div class="line">ini_set(<span class="string">'xdebug.var_display_max_data'</span>, <span class="number">8192</span>);</div></pre></td></tr></table></figure></p>
-<p>Reference:</p>
-<ul>
-<li><a href="https://stackoverflow.com/questions/9998490/how-to-get-xdebug-var-dump-to-show-full-object-array" target="_blank" rel="external">https://stackoverflow.com/questions/9998490/how-to-get-xdebug-var-dump-to-show-full-object-array</a></li>
-</ul>
-</div></article></li></ul></main><footer><div class="paginator"><span class="page-number current">1</span></div><div class="copyright"><p>© 2017 <a href="https://tarik.io">Tarık Demirci</a></p></div></footer></div><script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" crossorigin="anonymous"></script><script src="//cdn.bootcss.com/jquery/3.1.1/jquery.js" crossorigin="anonymous"></script><script>$(document).ready(function() { $('pre').each(function(i, block) { hljs.highlightBlock(block); }); });</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Tarik Demirci | Software Engineer</title>
+
+
+	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/themes/grey-white.css">
+</head>
+<body>
+<main>
+	<div class="intro">Hello, I'm Tarik!</div>
+	<div class="tagline">Netherlands based Software Engineer | Tinkerer | Casual Gamer</div>
+	<div class="icons-social">
+		<a target="_blank" href="https://github.com/tarikdemirci"><i class="fab fa-github"></i></a>
+		<a target="_blank" href="https://www.linkedin.com/in/tarikdemirci"><i class="fab fa-linkedin"></i></a>
+	</div>
+</main>
+</body>
+</html>
